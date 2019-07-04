@@ -1,22 +1,9 @@
 import axios from 'axios';
 
-export const getNotes = () => {
+export const getNotes = (search ='', sort='', limit=10) => {
+    let url = `http://192.168.6.129:9002/notes?search=${search}&sort=${sort}&limit=${limit}`;
     return {
         type: 'GET_NOTES',
-        payload: axios.get('http://192.168.6.130:9002/notes')
-    }
-};
-
-export const getNotesAsc = () => {
-    return {
-        type: 'GET_NOTES_ASC',
-        payload: axios.get('http://192.168.6.130:9002/notes&sort=asc')
-    }
-};
-
-export const getNotesDesc = () => {
-    return {
-        type: 'GET_NOTES_DESC',
-        payload: axios.get('http://192.168.6.130:9002/notes&sort=desc')
+        payload: axios.get(url)
     }
 };

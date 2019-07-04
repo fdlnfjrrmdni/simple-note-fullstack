@@ -28,20 +28,22 @@ class Home extends Component {
         navigation.toggleDrawer();
     }
 
-    state = { modalVisible: false, }; 
+    state = { 
+        modalVisible: false
+    }; 
 
     setModal(visible) { 
         this.setState({ modalVisible: visible }); 
     }
 
     componentDidMount = () => {
-        this.getData()
+        this.getData();
     }
     
-    getData = () => {
-        this.props.dispatch(getNotes())
+    getData = (search,sort) => {
+        this.props.dispatch(getNotes(search,sort))
     }
-    
+
     renderItem = ({ item, index }) => (
         <Cards
             press={this.toNote}
@@ -79,10 +81,14 @@ class Home extends Component {
                     onPress={() => { this.setModal(!this.state.modalVisible); }} >    
                         <View style={{ paddingRight: 15, paddingLeft: 200, paddingTop: 50 }}>
                             <View style={styles.modal}>
-                                <TouchableOpacity onPress={() => { this.setModal(!this.state.modalVisible); }} >
+                                <TouchableOpacity onPress={() => { 
+                                    this.getData('','asc')
+                                    }} >
                                     <Text style={{padding: 10}}>ASCENDING</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => { this.setModal(!this.state.modalVisible); }} >
+                                <TouchableOpacity onPress={() => { 
+                                    this.getData('','desc')
+                                    }} >
                                     <Text style={{padding: 10}}>DESCENDING</Text>
                                 </TouchableOpacity>
                             </View> 

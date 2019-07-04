@@ -1,11 +1,29 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput, Text } from 'react-native';
+import { getNotes } from '../Publics/redux/actions/notes';
+import { connect } from 'react-redux';
 
 class Search extends Component {
+    constructor(props) {
+    super(props);
+        this.state = {text: ''};
+    }
+
+    getData = (search,sort) => {
+        this.props.dispatch(getNotes(search,sort))
+    }
+
     render() {
         return(
             <View style={styles.searchBar}>
-                <TextInput style={{ marginLeft: 10, marginRight: 25 }} placeholder="Search..." />
+                <TextInput 
+                    onChangeText={(text) => {
+                            this.setState({text})
+                            this.getData(text)
+                        }
+                    }
+                    style={{ marginLeft: 10, marginRight: 25 }} 
+                    placeholder="Search..."/>
             </View>
         );
     }
@@ -27,4 +45,10 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Search;
+const mapStateToProps = (state) => {
+    return {
+        notes: state.notes
+    }
+}
+
+export default connect(mapStateToProps)(Search)
