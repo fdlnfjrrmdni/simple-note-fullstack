@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity,
         StatusBar, ScrollView, 
         FlatList, Modal } from 'react-native';
 import { View, Text, Container } from 'native-base';
-import { getNotes } from '../Publics/redux/actions/notes';
+import { fetch } from '../Publics/redux/actions/notes';
 import { connect } from 'react-redux';
 
 import Fabs from '../Components/Fabs';
@@ -28,31 +28,24 @@ class Home extends Component {
         navigation.toggleDrawer();
     }
 
-    state = { 
-        modalVisible: false
-    }; 
-
     setModal(visible) { 
         this.setState({ modalVisible: visible }); 
     }
 
-    componentDidMount = () => {
-        this.getData();
-    }
-    
-    getData = (search,sort) => {
-        this.props.dispatch(getNotes(search,sort))
+    fetchData = (search, sort) => {
+        this.props.dispatch(fetch(search, sort));
     }
 
-    renderItem = ({ item, index }) => (
-        <Cards
-            press={this.toNote}
-            date={item.time}
-            title={item.title}
-            category={item.category}
-            content={item.note}
-        />
-    )
+    componentDidMount = () => {
+        this.fetchData();
+    }
+
+    constructor(props){
+        super(props);
+        this.state = {
+            modalVisible: false
+        }
+    }
 
     _keyExtractor = (item, index) => item.id.toString();
 
@@ -82,12 +75,12 @@ class Home extends Component {
                         <View style={{ paddingRight: 15, paddingLeft: 200, paddingTop: 50 }}>
                             <View style={styles.modal}>
                                 <TouchableOpacity onPress={() => { 
-                                    this.getData('','asc')
+                                    this.fetchData('','asc')
                                     }} >
                                     <Text style={{padding: 10}}>ASCENDING</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => { 
-                                    this.getData('','desc')
+                                    this.fetchData('','desc')
                                     }} >
                                     <Text style={{padding: 10}}>DESCENDING</Text>
                                 </TouchableOpacity>
@@ -106,9 +99,19 @@ class Home extends Component {
                             numColumns={2}
                             data={this.props.notes.data}
                             keyExtractor={this._keyExtractor}
-                            renderItem={this.renderItem}
+                            renderItem={
+                                ({ item, index }) => (
+                                    <Cards
+                                        press={this.toNote}
+                                        date={item.time}
+                                        title={item.title}
+                                        category={item.category}
+                                        content={item.note}
+                                    />
+                                )
+                            }
                             refreshing={this.props.notes.isLoading}
-                            onRefresh={this.getData}
+                            onRefresh={this.fetchData}
                         />
                     </View>
                 </ScrollView>

@@ -19,7 +19,10 @@ class FormNote extends Component {
         return (
             <Form>
                 <View style={styles.input}>
-                    <Input placeholder='ADD TITLE ...' placeholderTextColor='#c4c4c4' style={styles.inputTitle} />
+                    <Input 
+                    placeholder='ADD TITLE ...' 
+                    placeholderTextColor='#c4c4c4' 
+                    style={styles.inputTitle} />
                     <Textarea rowSpan={9} placeholder='ADD DESCRIPTION ...' placeholderTextColor='#c4c4c4' style={styles.inputDescription} />
                 </View>
 

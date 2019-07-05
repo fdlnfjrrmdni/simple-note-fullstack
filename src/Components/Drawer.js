@@ -8,6 +8,7 @@ import { View, Text, Container,
         Thumbnail, ListItem, Item, 
         Form, Input } from 'native-base';
 import { getCategories } from '../Publics/redux/actions/categories';
+import { addCategory } from '../Publics/redux/actions/categories';
 import { connect } from 'react-redux';
 
 class Drawer extends Component {
@@ -23,7 +24,17 @@ class Drawer extends Component {
         navigation.toggleDrawer();
     }
 
-    state = { modalVisible: false, };
+    constructor(props) {
+        super(props);
+        this.state = {
+            category_id: '',
+            category: '',
+            note: '',
+            title: '',
+            modalVisible: false
+        };
+    }
+
     setModal(visible) {
         this.setState({ modalVisible: visible });
     }

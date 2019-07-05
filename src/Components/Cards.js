@@ -1,11 +1,39 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { getCategories } from '../Publics/redux/actions/categories';
+import { connect } from 'react-redux';
 
 class Cards extends Component {
+    componentDidMount = () => {
+        this.getData()
+    }
+
+    getData = () => {
+        this.props.dispatch(getCategories())
+    }
+
+    constructor(props) {
+        super(props);
+        this.Categories = this.props.categories.data;
+        this.state = {
+            color: this.props.category == 'Works' ? '#2FC2DF' : 
+                    this.props.category == 'Books' ? '#FAD06C' : 
+                    this.props.category == 'Movies' ? '#C0EB6A' :
+                    this.props.category == 'Links' ? '#BFD833' :
+                    this.props.category == 'To-do' ? '#9992ff' : '#b4b5b4',
+        };
+    }
+
+    getColor = () => {
+        this.Categories.map((category) => {
+            category.color
+        })
+    }
+
     render() {
         return(
             <View style={{ marginRight: 30 }}>
-                <TouchableOpacity style={styles.card} onPress={this.props.press}>
+                <TouchableOpacity style={[styles.card, { backgroundColor: this.state.color }]} onPress={this.props.press}>
                     <Text style={styles.cardDate}>{this.props.date}</Text>
                     <Text numberOfLines={1} style={styles.cardTitle}>{this.props.title}</Text>
                     <Text numberOfLines={1} style={styles.cardCategory}>{this.props.category}</Text>
@@ -21,7 +49,6 @@ const styles = StyleSheet.create({
         width: 138,
         height: 138,
         borderRadius: 7,
-        backgroundColor: '#FF92A9',
         elevation: 5,
         padding: 12,
         marginBottom: 27
@@ -48,4 +75,10 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Cards;
+const mapStateToProps = (state) => {
+    return {
+        categories: state.categories
+    }
+}
+
+export default connect(mapStateToProps)(Cards)

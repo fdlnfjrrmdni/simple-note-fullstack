@@ -1,26 +1,50 @@
 const initialState = {
-    number: 0,
-    data: [],
-    results: [],
-    isLoading: false
+    notes: [],
+    isLoading: false,
+    isFinish: false,
+    isError: false,
 }
 
 export default notes = (state = initialState, action) => {
     switch (action.type) {
-        case 'GET_NOTES_PENDING':
+        case 'FETCH_NOTE_PENDING':
             return {
+                ...state,
                 isLoading: true
             }
 
-        case 'GET_NOTES_REJECTED':
+        case 'FETCH_NOTE_FULFILLED':
             return {
-                isLoading: false
+                ...state,
+                isLoading: false,
+                isFinish: true,
+                data: action.payload.data.data
             }
 
-        case 'GET_NOTES_FULFILLED':
+        case 'FETCH_NOTE_REJECTED':
             return {
+                ...state,
                 isLoading: false,
-                data: action.payload.data.data
+                isError: true
+            }
+
+        case 'ADD_NOTE_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'ADD_NOTE_FULFILLED':
+            return {
+                ...state,
+                isLoading: false,
+                isFinish: true,
+                notes: [...state.notes, action.payload.data]
+            }
+        case 'ADD_NOTE_REJECTED':
+            return {
+                ...state,
+                isLoading: false,
+                isError: true
             }
 
         default:

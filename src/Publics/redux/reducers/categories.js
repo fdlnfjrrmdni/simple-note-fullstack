@@ -1,7 +1,8 @@
 const initialState = {
-    number: 0,
     data: [],
-    results: []
+    isLoading: false,
+    isFinish: false,
+    isError: false,
 }
 
 export default categories = (state = initialState, action) => {
@@ -11,6 +12,24 @@ export default categories = (state = initialState, action) => {
                 data: action.payload.data.data
             }
 
+        case 'ADD_CATEGORY_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'ADD_CATEGORY_FULFILLED':
+            return {
+                ...state,
+                isLoading: false,
+                isFinish: true,
+                categories: [...state.categories, action.payload.data]
+            }
+        case 'ADD_CATEGORY_REJECTED':
+            return {
+                ...state,
+                isLoading: false,
+                isError: true
+            }
         default:
             return state;
     }

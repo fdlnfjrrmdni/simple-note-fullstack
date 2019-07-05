@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Text } from 'react-native';
-import { getNotes } from '../Publics/redux/actions/notes';
+import { fetch } from '../Publics/redux/actions/notes';
 import { connect } from 'react-redux';
 
 class Search extends Component {
@@ -10,7 +10,7 @@ class Search extends Component {
     }
 
     getData = (search,sort) => {
-        this.props.dispatch(getNotes(search,sort))
+        this.props.dispatch(fetch(search,sort))
     }
 
     render() {
