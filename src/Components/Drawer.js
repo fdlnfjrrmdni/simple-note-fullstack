@@ -27,10 +27,9 @@ class Drawer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            category_id: '',
-            category: '',
-            note: '',
-            title: '',
+            name: '',
+            icon: '',
+            color: '',
             modalVisible: false
         };
     }
@@ -45,6 +44,15 @@ class Drawer extends Component {
 
     getData = () => {
         this.props.dispatch(getCategories())
+    }
+
+    addCategory = () => {
+        const { name, icon, color } = this.state;
+        if (name !== '' && icon !== '') {
+            this.props.dispatch(addCategory({ name, icon, color }));
+            this.setModal(!this.state.modalVisible); 
+            this.getData();
+        }
     }
 
     renderItem = ({ item, index }) => (
@@ -65,18 +73,19 @@ class Drawer extends Component {
             <Container>
 
                 {/* ============ Drawer ============*/}
+                <View style={styles.thumbnailBar}>
+                    <Thumbnail style={styles.thumbnail} source={{ uri: 'https://cdn.moneysmart.id/wp-content/uploads/2019/03/08124226/Untitled-design-2.jpeg' }} />
+                </View>
+                <Text style={styles.name}>Steve Jobs</Text>
+
                 <ScrollView>
-                    <View style={styles.thumbnailBar}>
-                        <Thumbnail style={styles.thumbnail} source={{ uri: 'https://cdn.moneysmart.id/wp-content/uploads/2019/03/08124226/Untitled-design-2.jpeg' }} />
-                    </View>
-                    <Text style={styles.name}>Steve Jobs</Text>
-                    <View style={styles.menu}>
+                    <View>
                         <FlatList
                             data={this.props.categories.data}
                             keyExtractor={this._keyExtractor}
                             renderItem={this.renderItem}
                         />
-                        <ListItem icon>
+                        <ListItem icon style={{marginBottom: 40}}>
                             <Left><Icon name='add-circle'/></Left>
                             <Body style={styles.body}>
                                 <Text style={styles.textMenu} onPress={() => { this.setModal(true) }}>
@@ -98,15 +107,17 @@ class Drawer extends Component {
                                 <Form>
                                     <Item last>
                                         <Input placeholderTextColor='#aaa' 
-                                        placeholder='Category Name' />
+                                        placeholder='Category Name'
+                                        onChangeText={(text) => this.setState({name:text})} />
                                     </Item>
                                     <Item last>
                                         <Input placeholderTextColor='#aaa' 
-                                        placeholder='Image Url' />
+                                        placeholder='Icon Name' 
+                                        onChangeText={(text) => this.setState({icon:text})}/>
                                     </Item>
                                     <View style={styles.buttonBar}>
                                         <TouchableOpacity style={{marginRight: 7}} 
-                                        onPress={() => { this.setModal(!this.state.modalVisible); }}>
+                                        onPress={this.addCategory}>
                                             <Text style={styles.btnAdd}>
                                                 Add
                                             </Text>
@@ -188,9 +199,9 @@ const styles = StyleSheet.create({
         fontWeight: '600', 
         color: '#000', 
         textAlign: 'center', 
-        marginTop: 18 
+        marginTop: 18,
+        marginBottom: 70 
     },
-    menu: { marginTop: 70 },
     body: { borderBottomColor: 'transparent' },
     textMenu: { 
         fontSize: 20, 

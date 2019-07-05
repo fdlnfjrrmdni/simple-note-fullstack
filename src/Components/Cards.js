@@ -19,8 +19,8 @@ class Cards extends Component {
             color: this.props.category == 'Works' ? '#2FC2DF' : 
                     this.props.category == 'Books' ? '#FAD06C' : 
                     this.props.category == 'Movies' ? '#C0EB6A' :
-                    this.props.category == 'Links' ? '#BFD833' :
-                    this.props.category == 'To-do' ? '#9992ff' : '#b4b5b4',
+                    this.props.category == 'Links' ? '#B4B5B4' :
+                    this.props.category == 'To-do' ? '#484848' : '#484848',
         };
     }
 

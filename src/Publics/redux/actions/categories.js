@@ -5,7 +5,7 @@ const origin = `http://192.168.6.129:9002/categories`;
 export const getCategories = () => {
     return {
         type: 'GET_CATEGORIES',
-        payload: axios.get(`${origin}`)
+        payload: axios.get(origin)
     }
 };
 
