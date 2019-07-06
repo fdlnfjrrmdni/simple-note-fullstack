@@ -2,13 +2,13 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import { StyleSheet, TouchableOpacity, 
-        ScrollView, Modal, FlatList } from 'react-native';
+        ScrollView, Modal, FlatList, Alert } from 'react-native';
 import { View, Text, Container, 
         Left, Body, Icon, 
         Thumbnail, ListItem, Item, 
         Form, Input } from 'native-base';
 import { getCategories } from '../Publics/redux/actions/categories';
-import { addCategory } from '../Publics/redux/actions/categories';
+import { addCategory, deleteCategory } from '../Publics/redux/actions/categories';
 import { connect } from 'react-redux';
 
 class Drawer extends Component {
@@ -55,8 +55,28 @@ class Drawer extends Component {
         }
     }
 
+    _onLongPress = (id) => {
+        Alert.alert(
+            'Delete', 'Are you sure you want to delete this category?',
+            [
+                {
+                    text: 'Cancel',
+                    style: 'cancel'
+                },
+                {
+                    text: 'OK',
+                    onPress: () => {
+                        this.props.dispatch(deleteCategory(id))
+                        this.getData()
+                    }
+                },
+            ],
+            { cancelable: true }
+        )
+    }
+
     renderItem = ({ item, index }) => (
-        <ListItem icon>
+        <ListItem icon onLongPress={() => this._onLongPress(item.id)}>
             <Left><Icon name={item.icon} /></Left>
             <Body style={styles.body}>
                 <Text style={styles.textMenu}>

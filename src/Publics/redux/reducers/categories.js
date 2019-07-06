@@ -30,6 +30,27 @@ export default categories = (state = initialState, action) => {
                 isLoading: false,
                 isError: true
             }
+
+        case 'DELETE_CATEGORIES_PENDING':
+            return {
+                ...state,
+                isLoading: true,
+            };
+
+        case 'DELETE_CATEGORIES_REJECTED':
+            return {
+                ...state,
+                isLoading: false,
+                isError: true,
+            };
+
+        case 'DELETE_CATEGORIES_FULFILLED':
+            return {
+                ...state,
+                isLoading: false,
+                data: [...state]
+            };
+
         default:
             return state;
     }
