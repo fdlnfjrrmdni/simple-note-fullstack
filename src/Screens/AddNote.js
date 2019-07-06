@@ -20,6 +20,7 @@ class AddNote extends Component {
             category_id: '',
             category: '',
             note: '',
+            time: this.showDate(),
             title: ''
         };
     }
@@ -41,10 +42,21 @@ class AddNote extends Component {
         }
     }
 
+    showDate = () => {
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const today = new Date();
+        const thisMonth = months[today.getMonth()];
+        const thisDate = today.getDate();
+        const thisYear = today.getFullYear();
+        const thisHour = today.getHours();
+        const thisMinute = today.getMinutes();
+        return `${thisDate} ${thisMonth} ${thisYear} ${thisHour}.${thisMinute}`;
+    }
+
     addNotes = () => {
-        const { title, note, category_id } = this.state;
+        const { title, note, time, category_id } = this.state;
         if (title !== '' && category_id !== '') {
-            this.props.dispatch(addNote({ title, note, category_id }));
+            this.props.dispatch(addNote({ title, note, time, category_id }));
             this.props.navigation.navigate('Home');
         }
     }

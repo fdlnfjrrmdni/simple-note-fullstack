@@ -20,7 +20,7 @@ class Cards extends Component {
                     this.props.category == 'Books' ? '#FAD06C' : 
                     this.props.category == 'Movies' ? '#C0EB6A' :
                     this.props.category == 'Links' ? '#B4B5B4' :
-                    this.props.category == 'To-do' ? '#484848' : '#484848',
+                    this.props.category == 'To-do' ? '#FF92A9' : '#484848',
         };
     }
 
@@ -33,7 +33,7 @@ class Cards extends Component {
     render() {
         return(
             <View style={{ marginRight: 30 }}>
-                <TouchableOpacity style={[styles.card, { backgroundColor: this.state.color }]} onPress={this.props.press}>
+                <TouchableOpacity style={[styles.card, { backgroundColor: this.state.color }]} onPress={this.props.press} onLongPress={this.props.longPress}>
                     <Text style={styles.cardDate}>{this.props.date}</Text>
                     <Text numberOfLines={1} style={styles.cardTitle}>{this.props.title}</Text>
                     <Text numberOfLines={1} style={styles.cardCategory}>{this.props.category}</Text>
@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
         color: '#fff',
         textAlign: 'right',
         fontSize: 12,
-        fontWeight: '800'
+        fontWeight: '800',
+        marginBottom: 5
     },
     cardCategory: {
         color: '#fff',

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, TouchableOpacity, 
         StatusBar, ScrollView, 
-        FlatList, Modal } from 'react-native';
+        FlatList, Modal, Alert } from 'react-native';
 import { View, Text, Container } from 'native-base';
-import { fetch } from '../Publics/redux/actions/notes';
+import { fetch, deleteNote } from '../Publics/redux/actions/notes';
 import { connect } from 'react-redux';
 
 import Fabs from '../Components/Fabs';
@@ -38,6 +38,19 @@ class Home extends Component {
 
     componentDidMount = () => {
         this.fetchData();
+
+        this.subs = [
+            this.props.navigation.addListener('willFocus', () => {
+                this.setState({loading: true})
+                this.fetchData()
+            })
+        ]
+    }
+
+    componentWillUnmount = () => {
+        this.subs.forEach(sub => {
+            sub.remove()
+        })
     }
 
     constructor(props){
@@ -45,6 +58,37 @@ class Home extends Component {
         this.state = {
             modalVisible: false
         }
+    }
+
+    _onPress = (val1, val2, val3, val4, val5) => {
+        const {navigation} = this.props
+        navigation.navigate('Note', {
+            id: val1,
+            title: val2,
+            note: val3,
+            category: val4,
+            category_id: val5
+        })
+    }
+
+    _onLongPress = (id) => {
+        Alert.alert(
+            'Delete', 'Are you sure you want to delete this note?',
+            [
+                {
+                    text: 'Cancel',
+                    style: 'cancel'
+                },
+                {
+                    text: 'OK',
+                    onPress: () => {
+                        this.props.dispatch(deleteNote(id))
+                        this.fetchData()
+                    }
+                },
+            ],
+            {cancelable: true}
+        )
     }
 
     _keyExtractor = (item, index) => item.id.toString();
@@ -75,12 +119,14 @@ class Home extends Component {
                         <View style={{ paddingRight: 15, paddingLeft: 200, paddingTop: 50 }}>
                             <View style={styles.modal}>
                                 <TouchableOpacity onPress={() => { 
-                                    this.fetchData('','asc')
+                                    this.fetchData('','asc');
+                                    this.setModal(!this.state.modalVisible);
                                     }} >
                                     <Text style={{padding: 10}}>ASCENDING</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => { 
-                                    this.fetchData('','desc')
+                                    this.fetchData('','desc');
+                                    this.setModal(!this.state.modalVisible);
                                     }} >
                                     <Text style={{padding: 10}}>DESCENDING</Text>
                                 </TouchableOpacity>
@@ -102,11 +148,14 @@ class Home extends Component {
                             renderItem={
                                 ({ item, index }) => (
                                     <Cards
-                                        press={this.toNote}
-                                        date={item.time}
+                                        press={() => this._onPress(item.id, item.title, item.note, item.category, item.category_id)}
+                                        longPress={() => this._onLongPress(item.id)}
+                                        date={item.time.split(' ').slice(0, 2).join(' ')}
                                         title={item.title}
                                         category={item.category}
                                         content={item.note}
+                                        navigation={this.props.navigation} 
+                                        data={item}
                                     />
                                 )
                             }

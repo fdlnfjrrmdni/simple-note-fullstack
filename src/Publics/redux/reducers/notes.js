@@ -33,6 +33,7 @@ export default notes = (state = initialState, action) => {
                 ...state,
                 isLoading: true
             }
+
         case 'ADD_NOTE_FULFILLED':
             return {
                 ...state,
@@ -40,12 +41,57 @@ export default notes = (state = initialState, action) => {
                 isFinish: true,
                 notes: [...state.notes, action.payload.data]
             }
+
         case 'ADD_NOTE_REJECTED':
             return {
                 ...state,
                 isLoading: false,
                 isError: true
             }
+
+        case 'EDIT_NOTE_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+
+        case 'EDIT_NOTE_FULFILLED':
+            return {
+                ...state,
+                isLoading: false,
+                isFinish: true,
+                notes: state.notes.map(note =>
+                    (note.id == action.payload.data.id) ?
+                        action.payload.data : note
+                )
+            }
+            
+        case 'EDIT_NOTE_REJECTED':
+            return {
+                ...state,
+                isLoading: false,
+                isError: true
+            }
+
+        case 'DELETE_NOTES_PENDING':
+            return {
+                ...state,
+                isLoading: true,
+            };
+
+        case 'DELETE_NOTES_REJECTED':
+            return {
+                ...state,
+                isLoading: false,
+                isError: true,
+            };
+
+        case 'DELETE_NOTES_FULFILLED':
+            return {
+                ...state,
+                isLoading: false,
+                data: [...state]
+            };
 
         default:
             return state;

@@ -16,3 +16,17 @@ export const addNote = (data) => {
         payload: axios.post(origin, data)
     }
 }
+
+export const editNote = (id, data) => {
+    return {
+        type: "EDIT_NOTE",
+        payload: axios.patch(`${origin}/${id}`, data)
+    }
+}
+
+export const deleteNote = (id) => {
+    return {
+        type: "DELETE_NOTE",
+        payload: axios.delete(`${origin}/${id}`)
+    }
+}
