@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Text } from 'react-native';
 import { fetch } from '../Publics/redux/actions/notes';
 import { connect } from 'react-redux';
+import lodash from 'lodash';
 
 class Search extends Component {
     constructor(props) {
@@ -17,10 +18,10 @@ class Search extends Component {
         return(
             <View style={styles.searchBar}>
                 <TextInput 
-                    onChangeText={(text) => {
+                    onChangeText={lodash.debounce((text) => {
                             this.setState({text})
                             this.getData(text)
-                        }
+                        },500)
                     }
                     style={{ marginLeft: 10, marginRight: 25 }} 
                     placeholder="Search..."/>

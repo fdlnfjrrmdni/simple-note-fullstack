@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity,
         StatusBar, ScrollView, 
         FlatList, Modal, Alert } from 'react-native';
 import { View, Text, Container } from 'native-base';
-import { fetch, deleteNote } from '../Publics/redux/actions/notes';
+import { fetch, deleteNote, moreNotes } from '../Publics/redux/actions/notes';
 import { connect } from 'react-redux';
 
 import Fabs from '../Components/Fabs';
@@ -93,6 +93,16 @@ class Home extends Component {
 
     _keyExtractor = (item, index) => item.id.toString();
 
+    // moreData = () => {
+    //     console.log("page : " + this.props.notes.page);
+    //     console.log("total page : " + this.props.notes.totalPage);
+	// 	// if (this.props.notes.page !== this.props.notes.totalPage) {
+    //     //     this.props.notes.page++
+    //     //     this.props.dispatch(moreNotes(this.props.notes.page))
+    //         // console.log("data+"+this.props.notes.page);
+    //     // }
+	// }
+
     render() {
         return (
             <Container>
@@ -145,12 +155,14 @@ class Home extends Component {
                             numColumns={2}
                             data={this.props.notes.data}
                             keyExtractor={this._keyExtractor}
+                            // onEndReachedThreshold={0.5}
+                            // onEndReached={this.moreData()}
                             renderItem={
                                 ({ item, index }) => (
                                     <Cards
                                         press={() => this._onPress(item.id, item.title, item.note, item.category, item.category_id)}
                                         longPress={() => this._onLongPress(item.id)}
-                                        date={item.time.split(' ').slice(0, 2).join(' ')}
+                                        date={item.time}
                                         title={item.title}
                                         category={item.category}
                                         content={item.note}

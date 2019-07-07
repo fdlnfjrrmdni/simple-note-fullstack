@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const origin = `http://192.168.6.129:9002/notes`;
 
-export const fetch = (search ='', sort='', limit='', searchBy='') => {
-    let url = `${origin}?search=${search}&search_by=${searchBy}&sort=${sort}&limit=${limit}`;
+export const fetch = (search ='', sort='', searchBy='') => {
+    let url = `${origin}?search=${search}&search_by=${searchBy}&sort=${sort}`;
     return {
         type: "FETCH_NOTE",
         payload: axios.get(url)
@@ -30,3 +30,10 @@ export const deleteNote = (id) => {
         payload: axios.delete(`${origin}/${id}`)
     }
 }
+
+// export const moreNotes = (page) => {
+//     return {
+//         type: 'MORE_NOTES',
+//         payload: axios.get(`${origin}?page=${page}`)
+//     }
+// }

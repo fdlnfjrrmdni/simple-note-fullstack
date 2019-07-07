@@ -58,6 +58,10 @@ class EditNote extends Component{
             category_id: category_id
         })
 
+        this.Categories.map((category) => {
+            if (category.name == category) this.setState({ category_id: category.id })
+        })
+
         this.props.dispatch(getCategories())
     }
 
@@ -79,6 +83,8 @@ class EditNote extends Component{
     }
 
     render() {
+        console.log('category_id : '+this.state.category_id);
+        console.log('category : '+this.state.category);
         return (
             <Container>
                 <Headers

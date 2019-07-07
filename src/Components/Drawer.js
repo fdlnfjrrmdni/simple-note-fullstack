@@ -51,8 +51,8 @@ class Drawer extends Component {
         navigation.toggleDrawer();
     }
 
-    fetch = (search, sort, limit, by) => {
-        this.props.dispatch(fetch(search, sort, limit, by));
+    fetch = (search, sort, searchBy) => {
+        this.props.dispatch(fetch(search, sort, searchBy));
         this.toggleDrawer();
     }
 
@@ -88,7 +88,7 @@ class Drawer extends Component {
     renderItem = ({ item, index }) => (
         <ListItem icon 
         onLongPress={() => this._onLongPress(item.id)} 
-        onPress={() => this.fetch(item.name, undefined, undefined, 'categories.name')}>
+        onPress={() => this.fetch(item.name, '', 'categories.name')}>
             <Left><Icon name={item.icon} /></Left>
             <Body style={styles.body}>
                 <Text style={styles.textMenu}>
