@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Content, View, Item, Picker, Form, Input, Textarea, Text } from 'native-base';
 import { editNote } from '../Publics/redux/actions/notes';
-import { fetch } from '../Publics/redux/actions/notes';
 import { getCategories } from '../Publics/redux/actions/categories';
 import { connect } from 'react-redux';
 
@@ -27,21 +26,6 @@ class EditNote extends Component{
     }
 
     componentDidMount = () => {
-        const { navigation } = this.props;
-        const id = navigation.getParam('id', 'null')
-        const title = navigation.getParam('title', 'null')
-        const note = navigation.getParam('note', 'null')
-        const category = navigation.getParam('category', 'null')
-        const category_id = navigation.getParam('category_id', 'null')
-
-        this.setState({
-            id: id,
-            title: title,
-            note: note,
-            category: category,
-            category_id: category_id
-        })
-
         this.getData();
 
         this.subs = [
@@ -59,12 +43,22 @@ class EditNote extends Component{
     }
 
     getData = () => {
-        this.props.dispatch(getCategories())
-        this.fetchData();
-    }
+        const { navigation } = this.props;
+        const id = navigation.getParam('id', 'null')
+        const title = navigation.getParam('title', 'null')
+        const note = navigation.getParam('note', 'null')
+        const category = navigation.getParam('category', 'null')
+        const category_id = navigation.getParam('category_id', 'null')
 
-    fetchData = (search, sort) => {
-        this.props.dispatch(fetch(search, sort));
+        this.setState({
+            id: id,
+            title: title,
+            note: note,
+            category: category,
+            category_id: category_id
+        })
+
+        this.props.dispatch(getCategories())
     }
 
     updateCategory = (input) => {
@@ -79,13 +73,12 @@ class EditNote extends Component{
     updateNote = () => {
         const { id, title, note, category, category_id } = this.state;
         if (title !== '' && category !== '') {
-            this.props.dispatch(editNote({id},{ title, note, category_id }))
+            this.props.dispatch(editNote(id,{ title, note, category_id }))
             this.props.navigation.navigate('Home');
         }
     }
 
     render() {
-        console.log(this.state.category_id);
         return (
             <Container>
                 <Headers

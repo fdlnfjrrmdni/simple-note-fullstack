@@ -11,7 +11,7 @@ import DrawerMenu from './src/Components/Drawer';
 const AppDrawerNavigator = createDrawerNavigator({
   Home: { screen: Home },
   Note: { screen: Note },
-  AddNote: { screen: AddNote } 
+  AddNote: { screen: AddNote }
 }, {
   contentComponent: DrawerMenu,
   drawerWidth: 230

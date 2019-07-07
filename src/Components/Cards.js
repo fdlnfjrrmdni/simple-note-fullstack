@@ -8,20 +8,24 @@ class Cards extends Component {
         this.getData()
     }
 
+    getColor = () => {
+        this.state = {
+            color: this.props.category == 'Works' ? '#2FC2DF' : 
+                this.props.category == 'Books' ? '#FAD06C' : 
+                this.props.category == 'Movies' ? '#C0EC68' :
+                this.props.category == 'Links' ? '#C592FF' :
+                this.props.category == 'To-do' ? '#FF92A9' : '#B4B5B4',
+        };
+    }
+
     getData = () => {
-        this.props.dispatch(getCategories())
+        this.props.dispatch(getCategories());
     }
 
     constructor(props) {
         super(props);
         this.Categories = this.props.categories.data;
-        this.state = {
-            color: this.props.category == 'Works' ? '#2FC2DF' : 
-                    this.props.category == 'Books' ? '#FAD06C' : 
-                    this.props.category == 'Movies' ? '#C0EC68' :
-                    this.props.category == 'Links' ? '#C592FF' :
-                    this.props.category == 'To-do' ? '#FF92A9' : '#B4B5B4',
-        };
+        this.getColor();
     }
 
     dateFormat = (d) => {
@@ -56,6 +60,7 @@ class Cards extends Component {
     }
 
     render() {
+        this.getColor();
         return(
             <View style={{ marginRight: 30 }}>
                 <TouchableOpacity style={[styles.card, { backgroundColor: this.state.color }]} onPress={this.props.press} onLongPress={this.props.longPress}>
