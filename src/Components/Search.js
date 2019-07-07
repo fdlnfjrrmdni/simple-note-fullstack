@@ -10,7 +10,7 @@ class Search extends Component {
     }
 
     getData = (search,sort) => {
-        this.props.dispatch(fetch(search,sort))
+        this.props.dispatch(fetch(search))
     }
 
     render() {

@@ -7,6 +7,7 @@ import { View, Text, Container,
         Left, Body, Icon, 
         Thumbnail, ListItem, Item, 
         Form, Input } from 'native-base';
+import { fetch } from '../Publics/redux/actions/notes';
 import { getCategories } from '../Publics/redux/actions/categories';
 import { addCategory, deleteCategory } from '../Publics/redux/actions/categories';
 import { connect } from 'react-redux';
@@ -41,9 +42,18 @@ class Drawer extends Component {
     componentDidMount = () => {
         this.getData()
     }
-
     getData = () => {
         this.props.dispatch(getCategories())
+    }
+
+    toggleDrawer = () => {
+        const { navigation } = this.props;
+        navigation.toggleDrawer();
+    }
+
+    fetch = (search, sort, limit, by) => {
+        this.props.dispatch(fetch(search, sort, limit, by));
+        this.toggleDrawer();
     }
 
     addCategory = () => {
@@ -76,7 +86,9 @@ class Drawer extends Component {
     }
 
     renderItem = ({ item, index }) => (
-        <ListItem icon onLongPress={() => this._onLongPress(item.id)}>
+        <ListItem icon 
+        onLongPress={() => this._onLongPress(item.id)} 
+        onPress={() => this.fetch(item.name, undefined, undefined, 'categories.name')}>
             <Left><Icon name={item.icon} /></Left>
             <Body style={styles.body}>
                 <Text style={styles.textMenu}>

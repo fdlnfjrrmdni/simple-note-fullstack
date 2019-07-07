@@ -60,14 +60,14 @@ class Home extends Component {
         }
     }
 
-    _onPress = (val1, val2, val3, val4, val5) => {
+    _onPress = (id, title, note, category, category_id) => {
         const {navigation} = this.props
         navigation.navigate('Note', {
-            id: val1,
-            title: val2,
-            note: val3,
-            category: val4,
-            category_id: val5
+            id: id,
+            title: title,
+            note: note,
+            category: category,
+            category_id: category_id
         })
     }
 
@@ -119,13 +119,13 @@ class Home extends Component {
                         <View style={{ paddingRight: 15, paddingLeft: 200, paddingTop: 50 }}>
                             <View style={styles.modal}>
                                 <TouchableOpacity onPress={() => { 
-                                    this.fetchData('','asc');
+                                    this.fetchData(undefined,'asc');
                                     this.setModal(!this.state.modalVisible);
                                     }} >
                                     <Text style={{padding: 10}}>ASCENDING</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => { 
-                                    this.fetchData('','desc');
+                                    this.fetchData(undefined,'desc');
                                     this.setModal(!this.state.modalVisible);
                                     }} >
                                     <Text style={{padding: 10}}>DESCENDING</Text>

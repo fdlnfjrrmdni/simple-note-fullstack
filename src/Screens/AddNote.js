@@ -50,13 +50,13 @@ class AddNote extends Component {
         const thisYear = today.getFullYear();
         const thisHour = today.getHours();
         const thisMinute = today.getMinutes();
-        return `${thisDate} ${thisMonth} ${thisYear} ${thisHour}.${thisMinute}`;
+        return `${thisDate} ${thisMonth} ${thisYear}`;
     }
 
     addNotes = () => {
-        const { title, note, time, category_id } = this.state;
+        const { title, note, category_id } = this.state;
         if (title !== '' && category_id !== '') {
-            this.props.dispatch(addNote({ title, note, time, category_id }));
+            this.props.dispatch(addNote({ title, note, category_id }));
             this.props.navigation.navigate('Home');
         }
     }
