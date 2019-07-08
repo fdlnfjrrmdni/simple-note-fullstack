@@ -38,6 +38,10 @@ npm install
 react-native run-android
 ```
 ### Preview
+![Home](https://raw.githubusercontent.com/fdlnfjrrmdni/simple-note-fullstack/master/src/Assets/Screenshots/Screenshot_2019-07-07-22-20-03-383_com.noteapp.png)
+![Drawer](https://raw.githubusercontent.com/fdlnfjrrmdni/simple-note-fullstack/master/src/Assets/Screenshots/Screenshot_2019-07-07-22-20-21-833_com.noteapp.png)
+![Add](https://raw.githubusercontent.com/fdlnfjrrmdni/simple-note-fullstack/master/src/Assets/Screenshots/Screenshot_2019-07-07-22-20-39-195_com.noteapp.png)
+
 This is [screenshot](https://github.com/fdlnfjrrmdni/simple-note-fullstack/tree/master/src/Assets/Screenshots) and [demo video](https://www.instagram.com/tv/BzoqXOflk6m/?utm_source=ig_web_options_share_sheet) of my project
 
 ### Release APK
