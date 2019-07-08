@@ -48,7 +48,7 @@ This is [screenshot](https://github.com/fdlnfjrrmdni/simple-note-fullstack/tree/
 
 ### Release APK
 
-Is not available here
+Is available here, you can see above the apk name is app-release.apk
 
 ### Related Projects
 
