@@ -55,11 +55,7 @@ class EditNote extends Component{
             title: title,
             note: note,
             category: category,
-            category_id: category_id
-        })
-
-        this.Categories.map((category) => {
-            if (category.name == category) this.setState({ category_id: category.id })
+            category_id: category_id 
         })
 
         this.props.dispatch(getCategories())

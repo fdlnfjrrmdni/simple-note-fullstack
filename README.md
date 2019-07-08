@@ -37,6 +37,9 @@ This is a final project of the simple note app. but to run this project you must
 npm install
 react-native run-android
 ```
+### Preview
+This is [screenshot](https://github.com/fdlnfjrrmdni/simple-note-fullstack/tree/master/src/Assets/Screenshots) and [demo video](https://www.instagram.com/tv/BzoqXOflk6m/?utm_source=ig_web_options_share_sheet) of my project
+
 ### Release APK
 
 Is not available here
