@@ -22,11 +22,12 @@ This is a final project of the simple note app. but to run this project you must
 
 ## Features
 
-- Send text
-- Reveive text
-- Show current location
-- Show friend location
-- Add photo profile
+- Add note
+- Edit note
+- Delete note
+- Add category
+- Delete category
+- Search note
 
 ## Usage
 
