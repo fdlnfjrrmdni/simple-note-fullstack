@@ -1,4 +1,4 @@
-### Simple Note App
+# Simple Note App
 
 <div>
   <img src="https://mockuphone.com/upload/a57430d2442470ae82a9fbb4801fc1aa/googlepixelquiteblack/pixel_quite_black_portrait.png" width="280">
