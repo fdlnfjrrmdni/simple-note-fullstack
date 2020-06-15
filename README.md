@@ -1,9 +1,9 @@
 # Simple Note App
 
 <div>
-  <img src="https://mockuphone.com/upload/a57430d2442470ae82a9fbb4801fc1aa/googlepixelquiteblack/pixel_quite_black_portrait.png" width="280">
-  <img src="https://mockuphone.com/upload/e62c1ef347fc1667990111a68e43f3ca/googlepixelquiteblack/pixel_quite_black_portrait.png" width="280">
-  <img src="https://mockuphone.com/upload/61bc31abadf897fe203f938bcf86e356/googlepixelquiteblack/pixel_quite_black_portrait.png" width="280">
+  <img src="https://raw.githubusercontent.com/fdlnfjrrmdni/simple-note-fullstack/master/src/Assets/Screenshots/note1.png" width="280">
+  <img src="https://raw.githubusercontent.com/fdlnfjrrmdni/simple-note-fullstack/master/src/Assets/Screenshots/note2.png" width="280">
+  <img src="https://raw.githubusercontent.com/fdlnfjrrmdni/simple-note-fullstack/master/src/Assets/Screenshots/note3.png" width="280">
 </div>
 
 [Demo video](https://www.instagram.com/tv/BzoqXOflk6m/?utm_source=ig_web_options_share_sheet) of my project
